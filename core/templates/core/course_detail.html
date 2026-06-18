@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+
+{% block title %}About Course{% endblock %}
+
+{% block content %}
+<h1>About Course</h1>
+<ul>
+    <p>{{ course.title }} {{ course.description }} {{ course.duration }}</p>
+</ul>
+{% endblock %}

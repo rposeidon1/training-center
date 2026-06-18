@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+
+{% block title %}Student Form{% endblock %}
+
+{% block content %}
+{% if object %}Update Student{% else %}Create Form{% endif %}
+<h1>Student Form</h1>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div>
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+        </div>
+
+        <div>
+            {{ form.last_name.label_tag }}
+            {{ form.last_name }}
+        </div>
+
+        <div>
+            {{ form.email.label_tag }}
+            {{ form.email }}
+        </div>
+
+        <div>
+            {{ form.phone.label_tag }}
+            {{ form.phone }}
+        </div>
+        
+        <button type="submit">Add Student</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block title %}Course Form{% endblock %}
+
+{% block content %}
+{% if object %}Update Course{% else %}Create Form{% endif %}
+<h1>Course Form</h1>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div>
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+
+        <div>
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+
+        <div>
+            {{ form.duration.label_tag }}
+            {{ form.duration }}
+        </div>
+
+        <button type="submit">Add Course</button>
+    </form>
+</div>
+{% endblock %}

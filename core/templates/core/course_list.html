@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block title %}Courses List{% endblock %}
+
+{% block content %}
+<h1>List of All Courses</h1>
+
+<p>{% for course in courses %}
+    <li>{{ course.title }} {{ course.description }} {{ course.duration }}</li>
+{% empty %}
+    <li>No courses found in the system yet</li>
+</p>
+{% endfor %}
+{% endblock %}
