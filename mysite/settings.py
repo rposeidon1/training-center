@@ -119,16 +119,16 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
-LOGIN_REDIRECT_URL  = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
-LOGIN_URL           = '/accounts/login/'
+LOGIN_REDIRECT_URL  = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL           = 'login'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE':       'My Project API',
-    'DESCRIPTION': 'Auto-generated API docs',
+    'TITLE':       'Training Center Student Portal API',
+    'DESCRIPTION': 'API for managing students, courses and enrollments',
     'VERSION':     '1.0.0',
 }

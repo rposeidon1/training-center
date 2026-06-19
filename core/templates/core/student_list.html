@@ -5,10 +5,33 @@
 {% block content %}
 <h1>List of All Students</h1>
 
-<p>{% for student in students %}
-    <li>{{ student.first_name }} {{ student.last_name }}</li>
-{% empty %}
-    <li>No students found in the system yet</li>
-</p>
-{% endfor %}
+<input
+    type="text"
+    name="q"
+    placeholder="Search..."
+    hx-get="{% url 'students' %}"
+    hx-trigger="keyup changed delay:300ms"
+    hx-target="#object-list"
+    hx-swap="innerHTML"
+>
+<div id="object-list">
+    {% include "core/partials/student_list_partial.html" %}
+</div>
+
+{% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+
+
 {% endblock %}
