@@ -3,33 +3,79 @@
 {% block title %}Student Form{% endblock %}
 
 {% block content %}
-{% if object %}Update Student{% else %}Create Form{% endif %}
-<h1>Student Form</h1>
-<div>
-    <form method="POST">
-        {% csrf_token %}
+<div class="max-w-xl mx-auto space-y-8">
+    
+    <div class="pb-6 border-b border-zinc-900">
+        <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-500 block mb-1">
+            {% if object %}Update Profile{% else %}Registration{% endif %}
+        </span>
+        <h1 class="text-xl font-medium tracking-tight text-zinc-100">
+            {% if object %}Edit Student Information{% else %}Create Student Record{% endif %}
+        </h1>
+    </div>
 
-        <div>
-            {{ form.first_name.label_tag }}
-            {{ form.first_name }}
-        </div>
+    <div class="bg-zinc-900/20 border border-zinc-900 rounded p-6 sm:p-8">
+        <form method="POST" class="space-y-6 global-dark-inputs">
+            {% csrf_token %}
 
-        <div>
-            {{ form.last_name.label_tag }}
-            {{ form.last_name }}
-        </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-mono text-zinc-400">First Name</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                    <span class="text-[11px] text-zinc-500 font-mono mt-1">{{ form.first_name.errors.0 }}</span>
+                {% endif %}
+            </div>
 
-        <div>
-            {{ form.email.label_tag }}
-            {{ form.email }}
-        </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-mono text-zinc-400">Last Name</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                    <span class="text-[11px] text-zinc-500 font-mono mt-1">{{ form.last_name.errors.0 }}</span>
+                {% endif %}
+            </div>
 
-        <div>
-            {{ form.phone.label_tag }}
-            {{ form.phone }}
-        </div>
-        
-        <button type="submit">Add Student</button>
-    </form>
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-mono text-zinc-400">Email Address</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <span class="text-[11px] text-zinc-500 font-mono mt-1">{{ form.email.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-mono text-zinc-400">Phone Number</label>
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                    <span class="text-[11px] text-zinc-500 font-mono mt-1">{{ form.phone.errors.0 }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="pt-4 flex justify-end">
+                <button type="submit" class="w-full sm:w-auto text-xs font-medium bg-zinc-100 hover:bg-zinc-200 text-zinc-950 px-5 py-2 rounded transition-colors duration-150">
+                    {% if object %}Save Changes{% else %}Add Student{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<style>
+    .global-dark-inputs input, 
+    .global-dark-inputs select, 
+    .global-dark-inputs textarea {
+        width: 100%;
+        font-size: 0.75rem !important; /* text-xs */
+        background-color: rgb(24 24 27 / 0.5) !important; /* bg-zinc-900/50 */
+        border: 1px solid rgb(39 39 42) !important; /* border-zinc-800 */
+        border-radius: 0.25rem !important; /* rounded */
+        padding: 0.5rem 0.875rem !important; /* px-3.5 py-2 */
+        color: rgb(228 228 231) !important; /* text-zinc-200 */
+        transition: all 200ms ease;
+    }
+    .global-dark-inputs input:focus {
+        outline: none !important;
+        border-color: rgb(63 63 70) !important; /* focus:border-zinc-700 */
+        box-shadow: 0 0 0 1px rgb(63 63 70) !important;
+    }
+</style>
 {% endblock %}

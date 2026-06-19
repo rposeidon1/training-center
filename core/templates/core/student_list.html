@@ -3,35 +3,63 @@
 {% block title %}Students List{% endblock %}
 
 {% block content %}
-<h1>List of All Students</h1>
+<div class="space-y-8">
+    
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-zinc-900">
+        <div>
+            <h1 class="text-xl font-medium tracking-tight text-zinc-100">Students Directory</h1>
+            <p class="text-xs text-zinc-500 mt-1">Manage and monitor all registered active profiles.</p>
+        </div>
+        
+        <div class="relative w-full md:w-72">
+            <input
+                type="text"
+                name="q"
+                placeholder="Filter profiles..."
+                hx-get="{% url 'students' %}"
+                hx-trigger="keyup changed delay:300ms"
+                hx-target="#object-list"
+                hx-swap="innerHTML"
+                class="w-full text-xs bg-zinc-900/50 border border-zinc-800 rounded px-3.5 py-2 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-zinc-700 focus:ring-1 focus:ring-zinc-700 transition-all duration-200"
+            >
+        </div>
+    </div>
 
-<input
-    type="text"
-    name="q"
-    placeholder="Search..."
-    hx-get="{% url 'students' %}"
-    hx-trigger="keyup changed delay:300ms"
-    hx-target="#object-list"
-    hx-swap="innerHTML"
->
-<div id="object-list">
-    {% include "core/partials/student_list_partial.html" %}
+    <div id="object-list" class="min-w-full">
+        {% include "core/partials/student_list_partial.html" %}
+    </div>
+
+    {% if is_paginated %}
+        <div class="flex items-center justify-between pt-6 border-t border-zinc-900 text-xs font-mono">
+            <div>
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="text-zinc-400 hover:text-zinc-100 border border-zinc-800 bg-zinc-900/40 px-3 py-1.5 rounded transition-all duration-150">
+                        Previous
+                    </a>
+                {% else %}
+                    <span class="text-zinc-700 border border-zinc-900/50 px-3 py-1.5 rounded cursor-not-allowed">
+                        Previous
+                    </span>
+                {% endif %}
+            </div>
+
+            <span class="text-zinc-500">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            <div>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="text-zinc-400 hover:text-zinc-100 border border-zinc-800 bg-zinc-900/40 px-3 py-1.5 rounded transition-all duration-150">
+                        Next
+                    </a>
+                {% else %}
+                    <span class="text-zinc-700 border border-zinc-900/50 px-3 py-1.5 rounded cursor-not-allowed">
+                        Next
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
 </div>
-
-{% if is_paginated %}
-  <div class="pagination">
-    {% if page_obj.has_previous %}
-      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-    {% endif %}
-
-    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-
-    {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}">Next</a>
-    {% endif %}
-  </div>
-{% endif %}
-
-
-
 {% endblock %}

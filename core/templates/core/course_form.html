@@ -3,28 +3,83 @@
 {% block title %}Course Form{% endblock %}
 
 {% block content %}
-{% if object %}Update Course{% else %}Create Form{% endif %}
-<h1>Course Form</h1>
-<div>
-    <form method="POST">
-        {% csrf_token %}
+<div class="max-w-xl mx-auto space-y-8 animate-slide-up">
+    
+    <div class="pb-6 border-b border-zinc-900">
+        <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-500 block mb-1">
+            {% if object %}Modify Curriculum{% else %}New Curriculum{% endif %}
+        </span>
+        <h1 class="text-xl font-medium tracking-tight text-zinc-100">
+            Course Form
+        </h1>
+    </div>
 
-        <div>
-            {{ form.title.label_tag }}
-            {{ form.title }}
-        </div>
+    <div class="bg-zinc-900/20 border border-zinc-900 rounded-lg p-6 sm:p-8 transition-all duration-300 hover:border-zinc-800/80">
+        <form method="POST" class="space-y-6 global-dark-inputs">
+            {% csrf_token %}
 
-        <div>
-            {{ form.description.label_tag }}
-            {{ form.description }}
-        </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-mono text-zinc-400">Course Title</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    <span class="text-[11px] text-zinc-500 font-mono mt-1">{{ form.title.errors.0 }}</span>
+                {% endif %}
+            </div>
 
-        <div>
-            {{ form.duration.label_tag }}
-            {{ form.duration }}
-        </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-mono text-zinc-400">Syllabus Description</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <span class="text-[11px] text-zinc-500 font-mono mt-1">{{ form.description.errors.0 }}</span>
+                {% endif %}
+            </div>
 
-        <button type="submit">Add Course</button>
-    </form>
+            <div class="flex flex-col gap-2">
+                <label class="text-xs font-mono text-zinc-400">Term Duration</label>
+                {{ form.duration }}
+                {% if form.duration.errors %}
+                    <span class="text-[11px] text-zinc-500 font-mono mt-1">{{ form.duration.errors.0 }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="pt-4 flex justify-end">
+                <button type="submit" class="w-full sm:w-auto text-xs font-medium bg-zinc-100 hover:bg-zinc-200 text-zinc-950 px-5 py-2.5 rounded transition-all duration-150 active:scale-[0.98]">
+                    {% if object %}Update Course{% else %}Add Course{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<style>
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slide-up {
+        animation: slideUp 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .global-dark-inputs input, 
+    .global-dark-inputs select, 
+    .global-dark-inputs textarea {
+        width: 100%;
+        font-size: 0.75rem !important;
+        background-color: rgb(24 24 27 / 0.5) !important;
+        border: 1px solid rgb(39 39 42) !important;
+        border-radius: 0.375rem !important;
+        padding: 0.5rem 0.875rem !important;
+        color: rgb(228 228 231) !important;
+        transition: all 200ms ease;
+    }
+    .global-dark-inputs textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+    .global-dark-inputs input:focus,
+    .global-dark-inputs textarea:focus {
+        outline: none !important;
+        border-color: rgb(63 63 70) !important;
+        box-shadow: 0 0 0 1px rgb(63 63 70) !important;
+    }
+</style>
 {% endblock %}
