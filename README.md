@@ -1,5 +1,9 @@
 # Training Center Student Portal
 
+## Live Demo
+
+[Training Center Student Portal](https://training-center-production.up.railway.app)
+
 A full-stack Django web application for managing students, courses, and enrollments at a training center. Built with a dark, minimalist aesthetic and a professional Django + DRF architecture.
 
 ## Tech Stack
