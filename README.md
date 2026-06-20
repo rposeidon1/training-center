@@ -4,6 +4,17 @@
 
 [Training Center Student Portal](https://training-center-production.up.railway.app)
 
+## Key URLs
+
+| Page | Path |
+|------|------|
+| Dashboard | `/` |
+| Students | `/student-list/` |
+| Courses | `/course-list/` |
+| Admin | `/admin/` |
+| Swagger UI | `/api/schema/swagger-ui/` |
+
+
 A full-stack Django web application for managing students, courses, and enrollments at a training center. Built with a dark, minimalist aesthetic and a professional Django + DRF architecture.
 
 ## Tech Stack
