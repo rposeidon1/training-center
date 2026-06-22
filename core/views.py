@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.views import View
 from core.mixins import StaffOnlyMixin
 
+
 from core.models import Student, Course, Enrollment
 
 
@@ -40,7 +41,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
         context["total_courses"] = Course.objects.count()
         context["total_enrollments"] = Enrollment.objects.count()
         return context
-    
+     
 class StudentListView(LoginRequiredMixin, ListView):
     model = Student
     template_name = "core/student_list.html"
